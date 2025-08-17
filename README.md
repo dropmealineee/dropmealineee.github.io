@@ -1,1 +1,223 @@
 # dropmealineee.github.io
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>>_webcams</title>
+  <style>
+    :root {
+      --nord0: #2E3440;
+      --nord1: #3B4252;
+      --nord4: #D8DEE9;
+      --nord8: #88C0D0;
+      --nord9: #81A1C1;
+      --nord10: #5E81AC;
+    }
+
+    body {
+      margin: 0;
+      background-color: #0d1117;
+      font-family: monospace, Arial, sans-serif;
+      color: var(--nord8);
+    }
+
+    .top-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 15px;
+      box-sizing: border-box;
+      position: sticky;
+      top: 0;
+      background: #0d1117;
+      z-index: 100;
+    }
+
+    .top-bar h1 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--nord8);
+      font-weight: normal;
+    }
+
+    .refresh-btn {
+      background: var(--nord10);
+      border: none;
+      padding: 6px 14px;
+      color: #0d1117;
+      font-size: 13px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .refresh-btn:hover {
+      background: var(--nord9);
+      color: #0d1117;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 10px;
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .img-container {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .img-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 3px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .img-container:hover img {
+      transform: scale(1.05);
+      filter: brightness(0.8);
+    }
+
+    .title-overlay {
+      position: absolute;
+      bottom: 5px;
+      left: 5px;
+      background: rgba(0, 0, 0, 0.6);
+      color: var(--nord8);
+      padding: 3px 6px;
+      font-size: 11px;
+      border-radius: 3px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .img-container:hover .title-overlay {
+      opacity: 1;
+    }
+
+    /* Popup modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      padding-top: 50px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(46, 52, 64, 0.95);
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: var(--nord8);
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: var(--nord4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <h1>>_webcams</h1>
+    <button class="refresh-btn" onclick="refreshImages()">🔄 Refresh</button>
+  </div>
+
+  <div class="gallery" id="gallery"></div>
+
+  <!-- Popup Modal -->
+  <div id="modal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImg">
+  </div>
+
+  <script>
+    const images = [
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt1.jpg", title: "Hangurstoppen Cam 1" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt3.jpg", title: "Hangurstoppen Cam 2" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt2.jpg", title: "Hangurstoppen Cam 3" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt4.jpg", title: "Hangurstoppen Cam 4" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam1utsnitt3.jpg", title: "Hagurstoppen - Cam 5" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam4utsnitt4.jpg", title: "Slettafjellet Cam 1" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam4utsnitt1.jpg", title: "Slettafjellet Cam 2" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam4utsnitt3.jpg", title: "Slettafjellet Cam 3" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam1utsnitt1.jpg", title: "Myrkdalen - Bunn 1" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam1utsnitt2.jpg", title: "Myrkdalen - Nedre 2" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam2utsnitt2.jpg", title: "Myrkdalen - Nedre 3" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam2utsnitt3.jpg", title: "Myrkdalen - Nedre 4" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam3utsnitt1.jpg", title: "Myrkdalen - Vetlebotnen 5" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam3utsnitt2.jpg", title: "Myrkdalen - Vetlebotnen 6" },
+      { url: "https://upseteveret.no/_cam/Upsete1920.jpg", title: "Upsete" },
+      { url: "https://vertigo.velero.no/vhh/vhh_1.jpg", title: "Vatnahalsen" },
+      { url: "https://snap.vossaskyen.no/vosscamping_kamera2/vosscamping_kamera2.jpg", title: "Voss Camping" },
+      { url: "https://btweb.vosskom.no/bt_floyen_vest.jpg", title: "Bergen - Fløyen vest" },
+      { url: "https://btweb.vosskom.no/bt_torgallmenningen.jpg", title: "Bergen - Torgallmenningen" },
+      { url: "https://btweb.vosskom.no/bt_nygaardstangen.jpg", title: "Bergen - Nygårdstangen" },
+      { url: "https://webcam.flam.no/flam/flam15.jpg", title: "Flåm" },
+      { url: "https://webcam.flam.no/Legacy/Legacy-Front/Legacy_F.jpg", title: "Flåm Legacy" },
+      { url: "https://webcam.flam.no/Kjetil/aurland_web.jpg", title: "Aurland" },
+      { url: "https://roldal.net/bunnstasjon_ekspress.jpg", title: "Røldal Skisenter - nedre" },
+      { url: "https://roldal.net/topp_ekspress.jpg", title: "Røldal Skisenter - toppen" },
+      { url: "https://www.yr.no/webcams/1/2000/hemsedalsfjellet/1.jpg", title: "Hemsedal - Sør øst" },
+      { url: "https://www.yr.no/webcams/1/2000/stanghelle/1.jpg", title: "Vaksdal - Sør-vest" },
+      { url: "https://fotovoss.com/WebKamera/Bilete/VossNow.jpg", title: "Skulestadmoen" },
+      { url: "https://www.hyperspace.no/allsky/image.jpg", title: "Skjervet Nightsky" }
+    ];
+
+    function loadImages() {
+      const gallery = document.getElementById("gallery");
+      gallery.innerHTML = "";
+      images.forEach(img => {
+        const container = document.createElement("div");
+        container.className = "img-container";
+        container.innerHTML = `
+          <img src="${img.url}?t=${Date.now()}" alt="${img.title}" onclick="openModal('${img.url}')">
+          <div class="title-overlay">${img.title}</div>
+        `;
+        gallery.appendChild(container);
+      });
+    }
+
+    function refreshImages() {
+      loadImages();
+    }
+
+    function openModal(url) {
+      const modal = document.getElementById("modal");
+      const modalImg = document.getElementById("modalImg");
+      modal.style.display = "block";
+      modalImg.src = url + "?t=" + Date.now();
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    // Initial load
+    loadImages();
+  </script>
+
+</body>
+</html>
