@@ -147,29 +147,33 @@
   </div>
 
   <script>
-    const images = [
-      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt1.jpg", title: "Hangurstoppen Cam 1" },
-      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt3.jpg", title: "Hangurstoppen Cam 2" },
-      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt2.jpg", title: "Hangurstoppen Cam 3" },
-      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt4.jpg", title: "Hangurstoppen Cam 4" },
+const images = [
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt1.jpg", title: "Hangurstoppen - Cam 1" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt3.jpg", title: "Hangurstoppen - Cam 2" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt2.jpg", title: "Hangurstoppen - Cam 3" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt4.jpg", title: "Hangurstoppen - Cam 4" },
       { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam1utsnitt3.jpg", title: "Hangurstoppen - Cam 5" },
       { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam1utsnitt1.jpg", title: "Hangurstoppen - Cam 6" },
-      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam4utsnitt4.jpg", title: "Slettafjellet Cam 1" },
-      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam4utsnitt1.jpg", title: "Slettafjellet Cam 2" },
-      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam4utsnitt3.jpg", title: "Slettafjellet Cam 3" },
-      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam1utsnitt1.jpg", title: "Myrkdalen - Bunn 1" },
-      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam1utsnitt2.jpg", title: "Myrkdalen - Nedre 2" },
-      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam2utsnitt2.jpg", title: "Myrkdalen - Nedre 3" },
-      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam2utsnitt3.jpg", title: "Myrkdalen - Nedre 4" },
-      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam1utsnitt3.jpg", title: "Myrkdalen - Nedre 5" },
-      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam3utsnitt1.jpg", title: "Myrkdalen - Vetlebotnen 5" },
-      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam3utsnitt2.jpg", title: "Myrkdalen - Vetlebotnen 6" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam4utsnitt4.jpg", title: "Slettafjellet - Cam 1" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam4utsnitt1.jpg", title: "Slettafjellet - Cam 2" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam4utsnitt3.jpg", title: "Slettafjellet - Cam 3" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam1utsnitt1.jpg", title: "Myrkdalen - Bunn" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam2utsnitt2.jpg", title: "Myrkdalen - Landsbypark" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam2utsnitt3.jpg", title: "Myrkdalen - Expressheisen" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam1utsnitt2.jpg", title: "Myrkdalen - Badnbakken 1" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam1utsnitt3.jpg", title: "Myrkdalen - Badnabakken 2" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam2utsnitt1.jpg", title: "Myrkdalen - Strandaløypo" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam3utsnitt3.jpg", title: "Myrkdalen - Myrkdalsløypo" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam3utsnitt1.jpg", title: "Myrkdalen - Vetlebotnen 1" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam3utsnitt2.jpg", title: "Myrkdalen - Vetlebotnen 2" },
       { url: "https://upseteveret.no/_cam/Upsete1920.jpg", title: "Upsete" },
       { url: "https://vertigo.velero.no/vhh/vhh_1.jpg", title: "Vatnahalsen" },
       { url: "https://roldal.net/bunnstasjon_ekspress.jpg", title: "Røldal Skisenter - Nedre" },
       { url: "https://roldal.net/topp_ekspress.jpg", title: "Røldal Skisenter - Topp" },
       { url: "https://roldal.net/Nedre_heis.jpg", title: "Røldal Skisenter - Parkering" },
       { url: "https://roldal.net/roldal_02.jpg", title: "Røldal Skisenter - Varmestua" },
+      { url: "https://sognskisenter.org/webkam/parkering/image.jpg", title: "Sogn Skisenter - Bunn" },
+      { url: "https://sognskisenter.org/webkam/barnetrekket/image.jpg", title: "Sogn Skisenter - Badnabakke" },
       { url: "https://www.eikedalen.no/wc3/image00001.jpg", title: "Eikedalen - Tvillingtrekk" },
       { url: "https://www.eikedalen.no/wc4/image00001.jpg", title: "Eikedalen - Tobiasheisen" },
       { url: "https://www.eikedalen.no/wc2/image00001.jpg", title: "Eikedalen - Setertrekket" },
@@ -230,4 +234,5 @@
 
 </body>
 </html>
+
 
