@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G00VGQ2XWN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-G00VGQ2XWN');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>>_webcams</title>
+  <style>
+    :root {
+      --nord0: #2E3440;
+      --nord1: #3B4252;
+      --nord4: #D8DEE9;
+      --nord8: #88C0D0;
+      --nord9: #81A1C1;
+      --nord10: #5E81AC;
+    }
+
+    body {
+      margin: 0;
+      background-color: #0d1117;
+      font-family: monospace, Arial, sans-serif;
+      color: var(--nord8);
+    }
+
+    .top-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 15px;
+      box-sizing: border-box;
+      position: sticky;
+      top: 0;
+      background: #0d1117;
+      z-index: 100;
+    }
+
+    .top-bar h1 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--nord8);
+      font-weight: normal;
+    }
+
+    .btn {
+      background: var(--nord10);
+      border: none;
+      padding: 6px 14px;
+      color: #f4f6f9;
+      font-size: 13px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+      margin-left: 6px;
+    }
+
+    .btn:hover {
+      background: var(--nord9);
+      color: #f4f6f9;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .img-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: #161b22;
+      aspect-ratio: 4/3;
+    }
+
+    .img-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease, filter 0.3s ease;
+    }
+
+    .img-container:hover img {
+      transform: scale(1.08);
+      filter: brightness(1.05);
+    }
+
+    .title-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      color: var(--nord8);
+      padding: 30px 12px 8px;
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .img-container:hover .title-overlay {
+      opacity: 0.9;
+    }
+
+    /* Popup modal for images */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      padding-top: 50px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(14, 15, 18, 0.95);
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: var(--nord8);
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: var(--nord4);
+    }
+
+    /* About overlay */
+    .about-overlay {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(13, 17, 23, 0.95);
+      color: var(--nord4);
+      padding: 40px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    .about-overlay h2 {
+      color: var(--nord8);
+    }
+
+    .about-overlay .close-about {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: var(--nord8);
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .about-overlay .close-about:hover {
+      color: var(--nord4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar" id="top">
+    <h1>>_webcams</h1>
+    <div>
+      <button class="btn" onclick="openAbout()">ℹ️ About</button>
+      <button class="btn" onclick="refreshImages()">🔄 Refresh</button>
+    </div>
+  </div>
+
+  <div class="gallery" id="gallery"></div>
+
+  <!-- Popup Modal -->
+  <div id="modal" class="modal">
+    <span class="close" onclick="closeModal()">×</span>
+    <img class="modal-content" id="modalImg">
+  </div>
+
+
+  <!-- About Overlay -->
+  <div id="aboutOverlay" class="about-overlay">
+    <span class="close-about" onclick="closeAbout()">×</span>
+    <h2>About This Website</h2>
+    <p>
+      Here you will find a curated list of miscellaneous webcams from around various places west in Norway, mostly ski resorts.   
+      <br><br>
+      # Number of webcams: 50
+      <br><br>
+      The webcams are updated every hour, but there is a couple with longer intervals between the updates and a few of them are turned off
+      at night time. If one of the images is not displaying or loading correctly just hit the "refresh" button until it fetches it. 
+    </p>
+    <p>
+      # Sources: 
+    </p>
+        <p>
+      Voss Ski Resort, Myrkdalen Skisenter, Røldal Skisenter, Eikedalen Skisenter, Upsete Train Station, Vatnahalsen Hotel, Bergen, Flåm, Aurland, Hemsedal, 
+      Rødungstøl Høyfjellshotell, Sogn Skisenter, Stryn, Voss Camping, Sauda Skisenter, Ål, Volda Hornindals Skisenter, Ørsta Skisenter.  
+    </p>
+    <p>
+      # Contact information:</a>
+    </p>
+     <p>
+      * If you have any questions about the website feel free to drop me 
+      an <a href="mailto:tortrails1@proton.me">e-mail</a>.
+    </p>
+
+  </div>
+
+  <script>
+            const images = [
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt1.jpg", title: "Voss Resort - Hangurstoppen Cam 1" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt3.jpg", title: "Voss Resort - Hangurstoppen Cam 2" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt2.jpg", title: "Voss Resort - Hangurstoppen Cam 3" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt4.jpg", title: "Voss Resort - Hangurstoppen Cam 4" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam1utsnitt3.jpg", title: "Voss Resort - Hangurstoppen Cam 5" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam1utsnitt1.jpg", title: "Voss Resort - Hangurstoppen Cam 6" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam4utsnitt4.jpg", title: "Voss Resort - Slettafjellet Cam 1" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam4utsnitt1.jpg", title: "Voss Resort - Slettafjellet Cam 2" },
+      { url: "https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam4utsnitt3.jpg", title: "Voss Resort - Slettafjellet Cam 3" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam1utsnitt1.jpg", title: "Myrkdalen - Bunn" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam2utsnitt2.jpg", title: "Myrkdalen - Landsbypark" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam2utsnitt3.jpg", title: "Myrkdalen - Expressheisen" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam1utsnitt2.jpg", title: "Myrkdalen - Badnbakken 1" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam1utsnitt3.jpg", title: "Myrkdalen - Badnabakken 2" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam2utsnitt1.jpg", title: "Myrkdalen - Strandaløypo" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam3utsnitt3.jpg", title: "Myrkdalen - Myrkdalsløypo" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam3utsnitt1.jpg", title: "Myrkdalen - Vetlebotnen 1" },
+      { url: "https://cdn.norwaylive.tv/snapshots/d20a73f8-e147-4734-8acc-e13868f1382a/kam3utsnitt2.jpg", title: "Myrkdalen - Vetlebotnen 2" },
+      { url: "https://upseteveret.no/_cam/Upsete1920.jpg", title: "Upsete Trainstation" },
+      { url: "https://vertigo.velero.no/vhh/vhh_1.jpg", title: "Vatnahalsen Hotel" },
+      { url: "https://roldal.net/bunnstasjon_ekspress.jpg", title: "Røldal Skisenter - Nedre" },
+      { url: "https://roldal.net/topp_ekspress.jpg", title: "Røldal Skisenter - Topp" },
+      { url: "https://roldal.net/Nedre_heis.jpg", title: "Røldal Skisenter - Parkering" },
+      { url: "https://roldal.net/roldal_02.jpg", title: "Røldal Skisenter - Varmestua" },
+      { url: "https://sognskisenter.org/webkam/parkering/image.jpg", title: "Sogn Skisenter - Bunn" },
+      { url: "https://sognskisenter.org/webkam/barnetrekket/image.jpg", title: "Sogn Skisenter - Badnabakke" },
+      { url: "https://www.eikedalen.no/wc3/image00001.jpg", title: "Eikedalen - Tvillingtrekk" },
+      { url: "https://www.eikedalen.no/wc4/image00001.jpg", title: "Eikedalen - Tobiasheisen" },
+      { url: "https://www.eikedalen.no/wc2/image00001.jpg", title: "Eikedalen - Setertrekket" },
+      { url: "https://webcam.infotec.no/Arneloypa.jpg", title: "Geilo - Arneløypa" },
+      { url: "https://webcam.infotec.no/GeiloHolidayVestlia.jpg", title: "Geilo - Vestlia" },
+      { url: "https://nettkamera.cid.no/geilotoppenvestlia/current.jpg", title: "Geilo - Ski" },
+      { url: "https://webcam.sicodata.no/cam/vinterstryn/ftp_vinterstryn1/Kamera1000M.jpg?17555288", title: "Stryn - Bøasætra" },
+      { url: "https://proxy.iot.rbt.no/4fb83f21-3809-4736-8685-6b227e38fe7a.jpeg", title: "Volda - Hornindal Skisenter" },
+      { url: "https://www.orstaskisenter.no/img/webkamera/hovudtrase.jpg", title: "Ørsta Skisenter" },
+      { url: "https://www.saudaskisenter.no/webkamera/reolink3/SvandalenLodge.jpg", title: "Sauda Skisenter - Svandalen" },
+      { url: "https://www.saudaskisenter.no/webkamera/reolink2/familieheisbilde.jpg", title: "Sauda Skisenter - Familieheis" },
+      { url: "https://www.webkamerahallingdal.no/flaevatn/bilde000M.jpg", title: "Ål - Flævasshytta" },
+      { url: "https://www.webkamerahallingdal.no/rodungstolen/bilde000.jpg", title: "Rødungstøl Høyfjellshotell" },
+      { url: "https://snap.vossaskyen.no/vosscamping_kamera2/vosscamping_kamera2.jpg", title: "Voss Camping" },
+      { url: "https://btweb.vosskom.no/bt_floyen_vest.jpg", title: "Bergen - Fløyen vest" },
+      { url: "https://btweb.vosskom.no/bt_torgallmenningen.jpg", title: "Bergen - Torgallmenningen" },
+      { url: "https://btweb.vosskom.no/bt_nygaardstangen.jpg", title: "Bergen - Nygårdstangen" },
+      { url: "https://webcam.flam.no/flam/flam15.jpg", title: "Flåm" },
+      { url: "https://webcam.flam.no/Legacy/Legacy-Front/Legacy_F.jpg", title: "Flåm Legacy" },
+      { url: "https://webcam.flam.no/Kjetil/aurland_web.jpg", title: "Aurland" },
+      { url: "https://www.yr.no/webcams/1/2000/hemsedalsfjellet/1.jpg", title: "Hemsedal - Sør øst" },
+      { url: "https://fotovoss.com/WebKamera/Bilete/VossNow.jpg", title: "Skulestadmoen" },
+      { url: "https://www.hyperspace.no/allsky/image.jpg", title: "Skjervet Nightsky" }
+    ];
+
+    function loadImages() {
+      const gallery = document.getElementById("gallery");
+      gallery.innerHTML = "";
+      images.forEach(img => {
+        const container = document.createElement("div");
+        container.className = "img-container";
+        container.innerHTML = `
+          <img src="${img.url}?t=${Date.now()}" alt="${img.title}" onclick="openModal('${img.url}')">
+          <div class="title-overlay">${img.title}</div>
+        `;
+        gallery.appendChild(container);
+      });
+    }
+
+    function refreshImages() {
+      loadImages();
+    }
+
+    function openModal(url) {
+      const modal = document.getElementById("modal");
+      const modalImg = document.getElementById("modalImg");
+      modal.style.display = "block";
+      modalImg.src = url + "?t=" + Date.now();
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    function openAbout() {
+      document.getElementById("aboutOverlay").style.display = "block";
+    }
+
+    function closeAbout() {
+      document.getElementById("aboutOverlay").style.display = "none";
+    }
+
+    // Initial load
+    loadImages();
+  </script>
+
+</body>
+</html>
