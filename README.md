@@ -1,4 +1,92 @@
-# dropmealineee.github.io
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DropMeaLineee</title>
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <style>
+    :root {
+      --bg: #0d1117; /* single background color */
+      --text: #f0f0f0;
+      --accent: #4cafef;
+      --link-hover: #ffcc00;
+    }
+    body {
+      margin: 0;
+      font-family: "Fira Mono", monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6em;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* center vertically */
+      align-items: center;     /* center horizontally */
+      min-height: 100vh;
+      text-align: center;
+    }
+    header .logo {
+      display: inline-block;
+      background: url("img/logo_e.png") no-repeat center/contain;
+      width: 120px;
+      height: 120px;
+      margin-bottom: 1rem;
+    }
+    main {
+      max-width: 600px;
+      padding: 0 1rem;
+    }
+    article p {
+      margin-bottom: 1rem;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      color: var(--link-hover);
+    }
+    footer {
+      margin-top: 1rem; /* close to text */
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="https://dropmealineee.github.io" class="logo" aria-label="dropmealineee logo"></a>
+  </header>
+  <main>
+    <article>
+      <p><em>echo ("Hello World!")</em></p>
+      <p>
+        You have stumbled into my workshop of chaos, a scrapyard of half baked experiments, code that <sup>(allegedly)</sup> mutates 
+        after midnight and occasional transmissions from my anomalous reality.
+      </p>
+      <p>
+        <em>* Get in touch?</em> Old schoolers can send me an 
+        <a href="mailto:dropmealineee (a) gmail (dot) com">e-mail</a> like it’s 1999.
+      </p>
+      <p>
+        The rest of you cloak and dagger types can try to catch me for an anonymous, encrypted chat on
+        <a href="https://torproject.org">Tor</a>, 
+        <a href="https://geti2p.net/en/">I2P</a>, or  
+        <a href="https://freenet.org/">Freenet</a>.
+      </p>
+      <p><em>* Chat Status: User seems to be</em> <sup>(offline)</sup></p>
+    </article>
+  </main>
+  <footer>
+    <p>
+      © dropmealineee.github.io 
+      <a href="https://dropmealineee.github.io">home</a> - 
+      <a href="https://dropmealineee.github.io/webcam">webcams</a>
+    </p>
+  </footer>
+</body>
+</html>
 
-Just a curated list of webcams from ski resorts I am am visitng this winter. 
-https://dropmealineee.github.io/webcam/
