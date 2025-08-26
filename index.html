@@ -20,25 +20,38 @@
   <link rel="manifest" href="/site.webmanifest">
   <style>
     :root {
-      --bg: #0d1117; /* single background color */
+      --bg: #0d1117;
       --text: #f0f0f0;
       --accent: #4cafef;
       --link-hover: #ffcc00;
     }
 
+    /* Base page setup */
     body {
       margin: 0;
       font-family: "Fira Mono", monospace;
-      background: var(--bg);
+      background-color: var(--bg); /* solid background, no pulse */
       color: var(--text);
       line-height: 1.6em;
-
       display: flex;
       flex-direction: column;
-      justify-content: center; /* center vertically */
-      align-items: center;     /* center horizontally */
+      justify-content: center;
+      align-items: center;
       min-height: 100vh;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Particle canvas stays behind everything */
+    #particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
     }
 
     header .logo {
@@ -47,6 +60,13 @@
       width: 110px;
       height: 110px;
       margin-bottom: 1rem;
+      z-index: 1;
+      position: relative;
+    }
+
+    main, footer {
+      z-index: 1;
+      position: relative;
     }
 
     main {
@@ -68,12 +88,14 @@
     }
 
     footer {
-      margin-top: 1rem; /* close to text */
+      margin-top: 1rem;
       font-size: 0.8rem;
     }
   </style>
 </head>
 <body>
+  <canvas id="particles"></canvas>
+
   <header>
     <a href="https://dropmealineee.github.io" class="logo" aria-label="dropmealineee logo"></a>
   </header>
@@ -108,9 +130,54 @@
       © dropmealineee.github.io 
       <a href="https://dropmealineee.github.io">home</a> - 
       <a href="https://dropmealineee.github.io/webcam">webcams</a>
-      <!-- <a href="https://dropmealineee.github.io/webcam">livecam</a> -->
     </p>
   </footer>
+
+  <script>
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    // Create particles
+    for (let i = 0; i < 50; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 1,
+        speedX: (Math.random() - 0.5) * 0.5,
+        speedY: (Math.random() - 0.5) * 0.5
+      });
+    }
+
+    // Animate particles
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        // Wrap around edges
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,255,255,0.3)";
+        ctx.fill();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
 </body>
 </html>
-
