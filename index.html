@@ -1,115 +1,462 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6D8G29ZBD4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&gt;_dropmealineee</title>
+  <link rel="icon" type="image/x-icon" href="https://dropmealineee.github.io/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://dropmealineee.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://dropmealineee.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://dropmealineee.github.io/favicon-16x16.png">
+  <link rel="manifest" href="https://dropmealineee.github.io/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
-  gtag('config', 'G-6D8G29ZBD4');
-</script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>>_dropmealineee</title>
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
   <style>
     :root {
-      --bg: #0d1117; /* single background color */
-      --text: #f0f0f0;
-      --accent: #4cafef;
-      --link-hover: #ffcc00;
+      --bg:        #06080d;   /* near-black with blue undertone */
+      --bg2:       #090d14;   /* nav/bar background */
+      --panel:     #0b1220;
+      --border:    #142236;   /* cold steel blue border */
+      --blue:      #4cafef;   /* primary cyan-blue accent — from original site */
+      --blue-dim:  #0e3255;   /* dimmed accent for borders/lines */
+      --ice:       #a8d4f5;   /* light ice-blue for em/highlights */
+      --ice-dim:   #1a3a5a;
+      --red:       #ef4c4c;   /* stays red for offline indicator */
+      --text:      #b8cedd;   /* cold blue-tinted body text */
+      --text-dim:  #334a5e;   /* muted steel text */
+      --scan:      rgba(76,175,239,0.025);
     }
 
-    body {
-      margin: 0;
-      font-family: "Fira Mono", monospace;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6em;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
+    /* ── CRT scanline overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        var(--scan) 2px,
+        var(--scan) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── Noise vignette ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 50%, rgba(0,4,12,0.75) 100%);
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* ─────────────── TOP NAV BAR ─────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 36px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 100;
+    }
+
+    nav .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    nav .sys-label {
+      color: var(--blue);
+      font-family: 'Orbitron', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    nav .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      list-style: none;
+    }
+
+    nav .nav-links li a {
+      display: block;
+      padding: 0 14px;
+      height: 36px;
+      line-height: 36px;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-left: 1px solid var(--border);
+      transition: color 0.15s, background 0.15s;
+    }
+
+    nav .nav-links li a:hover {
+      color: var(--blue);
+      background: rgba(76,175,239,0.05);
+    }
+
+    nav .nav-links li a.active {
+      color: var(--blue);
+      border-bottom: 2px solid var(--blue);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+
+    .status-pill .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 6px var(--red);
+      animation: blink 2.4s ease-in-out infinite;
+    }
+
+    .status-pill .dot.online {
+      background: var(--blue);
+      box-shadow: 0 0 6px var(--blue);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--blue); }
+      50% { opacity: 0.6; box-shadow: 0 0 14px var(--blue); }
+    }
+
+    /* ─────────────── BOTTOM STATUS BAR ─────────────── */
+    .statusbar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 24px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      z-index: 100;
+    }
+
+    .statusbar .left { display: flex; gap: 20px; }
+    .statusbar .right { display: flex; gap: 20px; }
+
+    .statusbar span.hi { color: var(--ice); }
+
+    /* ─────────────── MAIN LAYOUT ─────────────── */
+    .page-wrap {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center; /* center vertically */
-      align-items: center;     /* center horizontally */
-      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px 44px;
+    }
+
+    /* ─────────────── CORNER BRACKETS ─────────────── */
+    .frame {
+      position: relative;
+      max-width: 560px;
+      width: 100%;
+      padding: 40px 44px;
+    }
+
+    .frame::before, .frame::after,
+    .frame .corner-br, .frame .corner-bl {
+      content: '';
+      position: absolute;
+      width: 18px; height: 18px;
+      border-color: var(--blue-dim);
+      border-style: solid;
+    }
+
+    .frame::before  { top: 0;    left: 0;   border-width: 1px 0 0 1px; }
+    .frame::after   { top: 0;    right: 0;  border-width: 1px 1px 0 0; }
+    .frame .corner-br { bottom: 0; right: 0;  border-width: 0 1px 1px 0; }
+    .frame .corner-bl { bottom: 0; left: 0;   border-width: 0 0 1px 1px; }
+
+    /* ─────────────── LOGO ─────────────── */
+    header {
       text-align: center;
+      margin-bottom: 28px;
     }
 
     header .logo {
       display: inline-block;
-      background: url("img/logo_e.png") no-repeat center/contain;
-      width: 110px;
-      height: 110px;
-      margin-bottom: 1rem;
+      background: url("https://dropmealineee.github.io/img/logo_e.png") no-repeat center/contain;
+      width: 90px;
+      height: 90px;
+      filter: drop-shadow(0 0 12px rgba(76,175,239,0.45));
+      transition: filter 0.3s;
     }
 
-    main {
-      max-width: 600px;
-      padding: 0 1rem;
+    header .logo:hover {
+      filter: drop-shadow(0 0 24px rgba(76,175,239,0.8));
+    }
+
+    /* ─────────────── TAG LINE above content ─────────────── */
+    .tag-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    .tag-row::before, .tag-row::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--blue-dim));
+    }
+    .tag-row::after {
+      background: linear-gradient(to left, transparent, var(--blue-dim));
+    }
+
+    /* ─────────────── ARTICLE TEXT ─────────────── */
+    article {
+      text-align: center;
     }
 
     article p {
-      margin-bottom: 1rem;
+      margin-bottom: 14px;
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.75;
     }
 
-    a {
-      color: var(--accent);
+    article p em {
+      color: var(--ice);
+      font-style: normal;
+    }
+
+    article sup {
+      color: var(--text-dim);
+      font-size: 10px;
+    }
+
+    article a {
+      color: var(--blue);
       text-decoration: none;
+      border-bottom: 1px solid var(--blue-dim);
+      transition: color 0.15s, border-color 0.15s;
     }
 
-    a:hover {
-      color: var(--link-hover);
+    article a:hover {
+      color: var(--ice);
+      border-color: var(--ice-dim);
     }
 
+    /* ─────────────── CHAT STATUS ROW ─────────────── */
+    .chat-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+      padding: 5px 14px;
+      border: 1px solid var(--border);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+    }
+
+    .chat-status .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 5px var(--red);
+      animation: blink 2.4s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    /* ─────────────── FOOTER ─────────────── */
     footer {
-      margin-top: 1rem; /* close to text */
-      font-size: 0.8rem;
+      margin-top: 30px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    footer a:hover {
+      color: var(--blue);
+    }
+
+    footer .sep { margin: 0 8px; opacity: 0.3; }
+
+    /* ─────────────── CLOCK ─────────────── */
+    #clock {
+      font-family: 'Orbitron', monospace;
+      font-size: 10px;
+      color: var(--blue);
+      letter-spacing: 0.1em;
+    }
+
+    /* ─────────────── FADE IN ─────────────── */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+    }
+    .fade-in:nth-child(1) { animation-delay: 0.1s; }
+    .fade-in:nth-child(2) { animation-delay: 0.25s; }
+    .fade-in:nth-child(3) { animation-delay: 0.4s; }
+    .fade-in:nth-child(4) { animation-delay: 0.55s; }
+    .fade-in:nth-child(5) { animation-delay: 0.7s; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <header>
-    <a href="https://dropmealineee.github.io" class="logo" aria-label="dropmealineee logo"></a>
-  </header>
 
-  <main>
-    <article>
-      <p><em>echo ("Hello World!")</em></p>
+  <!-- ── TOP NAV ── -->
+  <nav>
+    <div class="nav-left">
+      <span class="sys-label">SURV·SYS</span>
+      <ul class="nav-links">
+        <li><a href="https://dropmealineee.github.io/" class="active">// home</a></li>
+        <li><a href="https://dropmealineee.github.io/webcam">// webcams</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <span class="status-pill">
+        <span class="dot"></span>
+        USER OFFLINE
+      </span>
+    </div>
+  </nav>
 
-      <p>
-        You have stumbled into my git of chaos, a scrapyard of half baked experiments, code that <sup>(allegedly)</sup> mutates 
-        after midnight and occasional transmissions from my anomalous reality.
-      </p>
+  <!-- ── PAGE CENTER ── -->
+  <div class="page-wrap">
+    <div class="frame">
+      <span class="corner-br"></span>
+      <span class="corner-bl"></span>
 
-      <p>
-        <em>* Get in touch?</em> Old schoolers can drop me an 
-        <a href="mailto:dropmealineee (a) gmail (dot) com">e-mail</a> like it’s 1999.
-      </p>
+      <header class="fade-in">
+        <a href="https://dropmealineee.github.io/" class="logo" aria-label="dropmealineee logo"></a>
+      </header>
 
-      <p>
-        Or if I’m online, you can catch me in the encrypted backrooms for some anonymous whisper on
-        <a href="https://torproject.org">Tor</a>, 
-        <a href="https://geti2p.net/en/">I2P</a>, or  
-        <a href="https://freenet.org/">Freenet</a>.
-      </p>
+      <div class="tag-row fade-in">SIGNAL ACQUIRED</div>
 
-      <p><em>* Chat Status: User seems to be</em> <sup>(offline)</sup></p>
-    </article>
-  </main>
+      <main>
+        <article>
+          <p class="fade-in"><em>echo ("Hello World!")</em></p>
 
-  <footer>
-    <p>
-      © dropmealineee.github.io 
-      <a href="https://dropmealineee.github.io">home</a> - 
-      <a href="https://dropmealineee.github.io/webcam">webcams</a>
-      <!-- <a href="https://dropmealineee.github.io/webcam">livecam</a> -->
-    </p>
-  </footer>
+          <p class="fade-in">
+            You have stumbled into my git of chaos, a scrapyard of half baked experiments, code that <sup>(allegedly)</sup> mutates
+            after midnight and occasional transmissions from my anomalous reality.
+          </p>
+
+          <p class="fade-in">
+            <em>* Get in touch?</em> Old schoolers can drop me an
+            <a href="mailto:dropmealineee@gmail.com">e-mail</a> like it's 1999.
+          </p>
+
+          <p class="fade-in">
+            Or if I'm online, you can catch me in the encrypted backrooms for some anonymous whisper on
+            <a href="https://torproject.org/">Tor</a>,
+            <a href="https://geti2p.net/en/">I2P</a>, or
+            <a href="https://freenet.org/">Freenet</a>.
+          </p>
+
+          <p class="fade-in">
+            <em>* Chat Status: User seems to be</em><br>
+            <span class="chat-status">
+              <span class="dot"></span>
+              <sup>(offline)</sup>
+            </span>
+          </p>
+        </article>
+      </main>
+
+      <footer>
+        <p>© dropmealineee.github.io
+          <span class="sep">·</span>
+          <a href="https://dropmealineee.github.io/">home</a>
+          <span class="sep">–</span>
+          <a href="https://dropmealineee.github.io/webcam">webcams</a>
+        </p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ── BOTTOM STATUS BAR ── -->
+  <div class="statusbar">
+    <div class="left">
+      <span>■ SYSTEM ONLINE</span>
+      <span class="hi">NODE · DROPMEALINEEE</span>
+    </div>
+    <div class="right">
+      <span id="clock">--:--:--</span>
+      <span>UTC+0000</span>
+    </div>
+  </div>
+
+  <script>
+    function tick() {
+      const now = new Date();
+      const t = now.toUTCString().split(' ')[4];
+      document.getElementById('clock').textContent = t;
+    }
+    tick();
+    setInterval(tick, 1000);
+  </script>
+
 </body>
 </html>
