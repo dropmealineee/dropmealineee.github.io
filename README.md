@@ -3,5 +3,7 @@
 
  ![Model](https://raw.githubusercontent.com/dropmealineee/dropmealineee.github.io/refs/heads/main/screenshot.png)
 
+ ![Model](https://raw.githubusercontent.com/dropmealineee/dropmealineee.github.io/refs/heads/main/screenshot_2.png)
+
  Have a peak here: [https://dropmealineee.github.io](https://dropmealineee.github.io)
  
