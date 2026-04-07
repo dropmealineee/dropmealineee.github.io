@@ -737,10 +737,6 @@
        FEED DATA
     ───────────────────────────────────────── */
     const FEEDS = [
-{ url:'https://upseteveret.no/_cam/Upsete1920.jpg',                                                title:'Upsete – Train Station' },
-      { url:'https://www.finse.uio.no/news/webcam/dagens.jpg',                                           title:'Finse - Alpine Research Center' },
-     /* { url:'https://www.skiraundalen.no/webcam.jpg',                                                    title:'Mjølfjell – Ungdomsherberge' },  */
-     /* { url:'https://vertigo.velero.no/vhh/vhh_1.jpg',                                                   title:'Vatnahalsen Hotel' },  */
       { url:'https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt2.jpg', title:'Voss Resort – Hangurstoppen 01' },
       { url:'https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam1utsnitt1.jpg', title:'Voss Resort – Hangurstoppen 02' },
       { url:'https://cdn.norwaylive.tv/snapshots/55bfeb32-bd58-41ab-bb8e-b5ceffa4d0c5/kam2utsnitt3.jpg', title:'Voss Resort – Hangurstoppen 03' },
@@ -769,24 +765,26 @@
       { url:'https://roldal.net/topp_ekspress.jpg',                                                      title:'Røldal – Topp Ekspress' },
       { url:'https://roldal.net/Nedre_heis.jpg',                                                         title:'Røldal – Parkering' },
       { url:'https://roldal.net/ovrevarmestue000.jpg',                                                   title:'Røldal – Varmestua' },
-      { url:'https://sognskisenter.org/webkam/parkering/image.jpg',                                      title:'Sogn Skisenter – Bunn' },
-      { url:'https://sognskisenter.org/webkam/barnetrekket/image.jpg',                                   title:'Sogn Skisenter – Badnabakke' },
-      { url:'https://www.eikedalen.no/wc3/image00001.jpg',                                               title:'Eikedalen – Tvillingtrekk' },
-      { url:'https://www.eikedalen.no/wc4/image00001.jpg',                                               title:'Eikedalen – Tobiasheisen' },
-      { url:'https://www.eikedalen.no/wc2/image00001.jpg',                                               title:'Eikedalen – Setertrekket' },
       { url:'https://nettkamera.cid.no/geilotoppenvestlia/current.jpg',                                  title:'Geilo – Ski' },
       { url:'https://webcam.infotec.no/Arneloypa.jpg',                                                   title:'Geilo – Arneløypa' },
       { url:'https://webcam.infotec.no/GeiloHolidayVestlia.jpg',                                         title:'Geilo – Vestlia' },
-      { url:'https://www.yr.no/webcams/1/2000/hemsedalsfjellet/1.jpg',                                  title:'Hemsedal – Sør øst' },
+      { url:'https://www.eikedalen.no/wc3/image00001.jpg',                                               title:'Eikedalen – Tvillingtrekk' },
+      { url:'https://www.eikedalen.no/wc4/image00001.jpg',                                               title:'Eikedalen – Tobiasheisen' },
+      { url:'https://www.eikedalen.no/wc2/image00001.jpg',                                               title:'Eikedalen – Setertrekket' },     
+      { url:'https://sognskisenter.org/webkam/parkering/image.jpg',                                      title:'Sogn Skisenter – Bunn' },
+      { url:'https://sognskisenter.org/webkam/barnetrekket/image.jpg',                                   title:'Sogn Skisenter – Badnabakke' },
+      { url:'https://www.yr.no/webcams/1/2000/hemsedalsfjellet/1.jpg',                                   title:'Hemsedal – Sør øst' },
+      { url:'https://imgproxy.windy.com/_/full/plain/current/1687265765/original.jpg',                   title:'Loen – Skylift' }, 
       { url:'https://media.rogervik.no/wp-content/uploads/2025/07/reo1.jpg',                             title:'Stryn – 125 grader' },        
-      { url:'https://webcam.sicodata.no/cam/vinterstryn/ftp_vinterstryn1/Kamera1000M.jpg',               title:'Stryn – Bøasætra' }, 
-      { url:'https://imgproxy.windy.com/_/full/plain/current/1687265765/original.jpg',                   title:'Loen – Skylift' },         
+    /*  { url:'https://webcam.sicodata.no/cam/vinterstryn/ftp_vinterstryn1/Kamera1000M.jpg',               title:'Stryn – Bøasætra' }, */        
       { url:'https://proxy.iot.rbt.no/4fb83f21-3809-4736-8685-6b227e38fe7a.jpeg',                       title:'Volda – Hornindal Skisenter' },
       { url:'https://www.orstaskisenter.no/img/webkamera/hovudtrase.jpg',                               title:'Ørsta Skisenter' },
       { url:'https://www.saudaskisenter.no/webkamera/reolink3/SvandalenLodge.jpg',                      title:'Sauda – Svandalen Lodge' },
       { url:'https://www.saudaskisenter.no/webkamera/reolink2/familieheisbilde.jpg',                    title:'Sauda – Familieheis' },
       { url:'https://www.webkamerahallingdal.no/flaevatn/bilde000M.jpg',                                title:'Ål – Flævasshytta' },
       { url:'https://www.webkamerahallingdal.no/rodungstolen/bilde000.jpg',                             title:'Rødungstøl Høyfjellshotell' },
+      { url:'https://upseteveret.no/_cam/Upsete1920.jpg',                                                title:'Upsete – Train Station' },
+      { url:'https://www.finse.uio.no/news/webcam/dagens.jpg',                                           title:'Finse - Alpine Research Center' },  
       { url:'https://www.hyperspace.no/allsky/image.jpg',                                               title:'Voss – Skjervet Night Sky' },
       { url:'https://api.holfuy.com/cam/s107.jpg',                                                      title:'Voss HPK – Hanguren' },
       { url:'https://api.holfuy.com/cam/s475.jpg',                                                      title:'Voss HPK – Vangsvatnet' },
@@ -799,8 +797,8 @@
       { url:'https://btweb.vosskom.no/bt_floyen_vest.jpg',                                              title:'Bergen – Fløyen Vest' },
       { url:'https://imgproxy.windy.com/_/full/plain/current/1460757071/original.jpg',                  title:'Bergen Hus– Fløyen' },
       { url:'https://imgproxy.windy.com/_/full/plain/current/1628086074/original.jpg',                  title:'Bergen – Bryggen' },
+      { url:'https://btweb.vosskom.no/bt_nygaardstangen.jpg',                                           title:'Bergen – Nygårdstangen' },
       { url:'https://btweb.vosskom.no/bt_torgallmenningen.jpg',                                         title:'Bergen – Torgallmenningen' },
-      { url:'https://btweb.vosskom.no/bt_nygaardstangen.jpg',                                           title:'Bergen – Nygårdstangen' }
     ];
 
     /* ─────────────────────────────────────────
