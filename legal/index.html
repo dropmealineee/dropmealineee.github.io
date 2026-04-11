@@ -1,1 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&gt;_dropmealineee // legal</title>
+  <link rel="icon" type="image/x-icon" href="https://dropmealineee.github.io/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://dropmealineee.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://dropmealineee.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://dropmealineee.github.io/favicon-16x16.png">
+  <link rel="manifest" href="https://dropmealineee.github.io/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
+  <style>
+    :root {
+      --bg:        #06080d;
+      --bg2:       #090d14;
+      --panel:     #0b1220;
+      --border:    #142236;
+      --blue:      #4cafef;
+      --blue-dim:  #0e3255;
+      --ice:       #a8d4f5;
+      --ice-dim:   #1a3a5a;
+      --red:       #ef4c4c;
+      --text:      #b8cedd;
+      --text-dim:  #334a5e;
+      --scan:      rgba(76,175,239,0.025);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        var(--scan) 2px,
+        var(--scan) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 50%, rgba(0,4,12,0.75) 100%);
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* ── TOP NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 36px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 100;
+    }
+
+    nav .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    nav .sys-label {
+      color: var(--blue);
+      font-family: 'Orbitron', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    nav .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      list-style: none;
+    }
+
+    nav .nav-links li a {
+      display: block;
+      padding: 0 14px;
+      height: 36px;
+      line-height: 36px;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-left: 1px solid var(--border);
+      transition: color 0.15s, background 0.15s;
+    }
+
+    nav .nav-links li a:hover {
+      color: var(--blue);
+      background: rgba(76,175,239,0.05);
+    }
+
+    nav .nav-links li a.active {
+      color: var(--blue);
+      border-bottom: 2px solid var(--blue);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+
+    .status-pill .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 6px var(--red);
+      animation: blink 2.4s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--blue); }
+      50% { opacity: 0.6; box-shadow: 0 0 14px var(--blue); }
+    }
+
+    /* ── BOTTOM STATUS BAR ── */
+    .statusbar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 24px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      z-index: 100;
+    }
+
+    .statusbar .left { display: flex; gap: 20px; }
+    .statusbar .right { display: flex; gap: 20px; }
+    .statusbar span.hi { color: var(--ice); }
+
+    #clock {
+      font-family: 'Orbitron', monospace;
+      font-size: 10px;
+      color: var(--blue);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── PAGE LAYOUT ── */
+    .page-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 72px 20px 56px;
+    }
+
+    /* ── FRAME ── */
+    .frame {
+      position: relative;
+      max-width: 720px;
+      width: 100%;
+      padding: 40px 48px;
+    }
+
+    .frame::before, .frame::after,
+    .frame .corner-br, .frame .corner-bl {
+      content: '';
+      position: absolute;
+      width: 18px; height: 18px;
+      border-color: var(--blue-dim);
+      border-style: solid;
+    }
+
+    .frame::before  { top: 0;    left: 0;   border-width: 1px 0 0 1px; }
+    .frame::after   { top: 0;    right: 0;  border-width: 1px 1px 0 0; }
+    .frame .corner-br { bottom: 0; right: 0;  border-width: 0 1px 1px 0; }
+    .frame .corner-bl { bottom: 0; left: 0;   border-width: 0 0 1px 1px; }
+
+    /* ── HEADER ── */
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    header .logo {
+      display: inline-block;
+      background: url("https://dropmealineee.github.io/img/logo_e.png") no-repeat center/contain;
+      width: 72px;
+      height: 72px;
+      filter: drop-shadow(0 0 12px rgba(76,175,239,0.45));
+      transition: filter 0.3s;
+    }
+
+    header .logo:hover {
+      filter: drop-shadow(0 0 24px rgba(76,175,239,0.8));
+    }
+
+    /* ── TAB NAV ── */
+    .tab-row {
+      display: flex;
+      gap: 0;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 8px 20px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+      margin-bottom: -1px;
+    }
+
+    .tab-btn:hover { color: var(--blue); }
+
+    .tab-btn.active {
+      color: var(--blue);
+      border-bottom-color: var(--blue);
+    }
+
+    /* ── TAG ROW ── */
+    .tag-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    .tag-row::before, .tag-row::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--blue-dim));
+    }
+    .tag-row::after {
+      background: linear-gradient(to left, transparent, var(--blue-dim));
+    }
+
+    /* ── DOCUMENT CONTENT ── */
+    .doc-panel { display: none; }
+    .doc-panel.visible { display: block; }
+
+    .doc-panel .effective {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc-panel section {
+      margin-bottom: 28px;
+    }
+
+    .doc-panel h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .doc-panel h2::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--blue-dim);
+    }
+
+    .doc-panel p {
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
+    .doc-panel p em {
+      color: var(--ice);
+      font-style: normal;
+    }
+
+    .doc-panel ul {
+      list-style: none;
+      padding: 0;
+      margin: 6px 0 10px 0;
+    }
+
+    .doc-panel ul li {
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.8;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .doc-panel ul li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+    }
+
+    .doc-panel a {
+      color: var(--blue);
+      text-decoration: none;
+      border-bottom: 1px solid var(--blue-dim);
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .doc-panel a:hover {
+      color: var(--ice);
+      border-color: var(--ice-dim);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 30px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    footer a:hover { color: var(--blue); }
+    footer .sep { margin: 0 8px; opacity: 0.3; }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .frame { padding: 28px 20px; }
+      nav .sys-label { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── TOP NAV ── -->
+  <nav>
+    <div class="nav-left">
+      <span class="sys-label">SURV·SYS</span>
+      <ul class="nav-links">
+        <li><a href="https://dropmealineee.github.io/">// home</a></li>
+        <li><a href="https://dropmealineee.github.io/webcam">// webcams</a></li>
+        <li><a href="https://dropmealineee.github.io/livecam">// livecam</a></li>
+        <li><a href="#" class="active">// legal</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <span class="status-pill">
+        <span class="dot"></span>
+        USER OFFLINE
+      </span>
+    </div>
+  </nav>
+
+  <!-- ── PAGE CENTER ── -->
+  <div class="page-wrap">
+    <div class="frame fade-in">
+      <span class="corner-br"></span>
+      <span class="corner-bl"></span>
+
+      <header>
+        <a href="https://dropmealineee.github.io/" class="logo" aria-label="dropmealineee logo"></a>
+      </header>
+
+      <div class="tag-row">LEGAL TRANSMISSIONS</div>
+
+      <!-- TAB SWITCHER -->
+      <div class="tab-row">
+        <button class="tab-btn active" onclick="switchTab('privacy', this)">// Privacy Policy</button>
+        <button class="tab-btn" onclick="switchTab('terms', this)">// Terms of Use</button>
+      </div>
+
+      <!-- ── PRIVACY POLICY ── -->
+      <div class="doc-panel visible" id="privacy">
+
+        <p class="effective">Effective date: 01.01.2026</p>
+
+        <p>This website, located at <a href="https://dropmealineee.github.io/">dropmealineee.github.io</a>, is operated by the site owner (<em>"we"</em>, <em>"us"</em>, <em>"our"</em>).</p>
+
+        <section>
+          <h2>01 · Data Collection</h2>
+          <p>We do not collect, store, or sell personal data directly.</p>
+          <p>However, limited data may be processed through third-party services:</p>
+          <p><em>Google Analytics</em></p>
+          <p>We use Google Analytics to understand general website traffic and usage patterns. This may include:</p>
+          <ul>
+            <li>IP address (anonymized where applicable)</li>
+            <li>Browser type and device information</li>
+            <li>Pages visited and time spent</li>
+          </ul>
+          <p>This data is collected and processed by Google under their own privacy policies. We do not control how Google uses this data.</p>
+        </section>
+
+        <section>
+          <h2>02 · External Content (Webcam Feeds)</h2>
+          <p>The webcam feeds displayed on this site are sourced from external providers. We:</p>
+          <ul>
+            <li>Do not host these feeds ourselves</li>
+            <li>Do not control their content or availability</li>
+            <li>Do not control any data collection performed by those providers</li>
+          </ul>
+          <p>Accessing these feeds may result in data being processed by third-party services.</p>
+        </section>
+
+        <section>
+          <h2>03 · Contact via Email</h2>
+          <p>If you contact us via email:</p>
+          <ul>
+            <li>Your email address and message content will be used only to respond to your inquiry</li>
+            <li>We do not sell, share, or distribute your email address to third parties</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>04 · Chat Function (OnionShare)</h2>
+          <p>The chat feature on this site is powered by <em>OnionShare</em> and operates over the Tor network:</p>
+          <ul>
+            <li>Communication is end-to-end encrypted</li>
+            <li>Messages are not stored by us</li>
+            <li>We do not log or monitor chat content</li>
+          </ul>
+          <p>Despite this, users should avoid sharing sensitive personal information.</p>
+        </section>
+
+        <section>
+          <h2>05 · External Links</h2>
+          <p>This site may contain links to external websites or services. We:</p>
+          <ul>
+            <li>Do not control these external sites</li>
+            <li>Are not responsible for their content, security, or privacy practices</li>
+          </ul>
+          <p>You access external links at your own risk.</p>
+        </section>
+
+        <section>
+          <h2>06 · Data Security</h2>
+          <p>We do not maintain databases of user information. Any third-party services used are responsible for their own security practices.</p>
+        </section>
+
+        <section>
+          <h2>07 · Changes to This Policy</h2>
+          <p>We may update this Privacy Policy at any time. Continued use of the site implies acceptance of the current version.</p>
+        </section>
+
+        <section>
+          <h2>08 · Contact</h2>
+          <p>For questions, contact us via the email address (dropmealineee (at) gmail (dot) com) provided on the website.</p>
+        </section>
+
+      </div>
+
+      <!-- ── TERMS OF USE ── -->
+      <div class="doc-panel" id="terms">
+
+        <p class="effective">Effective date: [Insert Date]</p>
+
+        <p>By accessing or using this website, you agree to the following terms.</p>
+
+        <section>
+          <h2>01 · Use of the Website</h2>
+          <p>This website is provided <em>"as is"</em> for informational and communication purposes. You agree to:</p>
+          <ul>
+            <li>Use the site lawfully</li>
+            <li>Not attempt to disrupt or misuse the service</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>02 · No Guarantees</h2>
+          <p>We make no guarantees regarding:</p>
+          <ul>
+            <li>Accuracy of information</li>
+            <li>Availability or uptime</li>
+            <li>Reliability of webcam feeds or chat services</li>
+          </ul>
+          <p>All content is provided without warranties of any kind.</p>
+        </section>
+
+        <section>
+          <h2>03 · External Content and Services</h2>
+          <p>This site relies on third-party services, including:</p>
+          <ul>
+            <li>Webcam feed providers</li>
+            <li>Google Analytics</li>
+            <li>OnionShare (for chat)</li>
+          </ul>
+          <p>We are not responsible for:</p>
+          <ul>
+            <li>Content provided by third parties</li>
+            <li>Downtime or failures of these services</li>
+            <li>Any damages resulting from their use</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>04 · External Links Disclaimer</h2>
+          <p>Links to external websites are provided for convenience only. We:</p>
+          <ul>
+            <li>Do not endorse external content</li>
+            <li>Have no control over those sites</li>
+            <li>Accept no liability for any loss or damage caused by their use</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>05 · Limitation of Liability</h2>
+          <p>To the fullest extent permitted by law, we are not liable for:</p>
+          <ul>
+            <li>Direct or indirect damages</li>
+            <li>Data loss</li>
+            <li>Service interruptions</li>
+            <li>Issues arising from third-party services</li>
+          </ul>
+          <p>Use this site at your own risk.</p>
+        </section>
+
+        <section>
+          <h2>06 · Privacy</h2>
+          <p>Your use of this site is also governed by the <a href="#" onclick="switchTab('privacy', document.querySelectorAll('.tab-btn')[0]); return false;">Privacy Policy</a> above.</p>
+        </section>
+
+        <section>
+          <h2>07 · Changes to Terms</h2>
+          <p>We may update these Terms at any time. Continued use of the website constitutes acceptance of the updated Terms.</p>
+        </section>
+
+        <section>
+          <h2>08 · Contact</h2>
+          <p>For questions regarding these Terms, use the contact email listed on the website. dropmealineee (at) gmail (dot) com.</p>
+        </section>
+
+      </div>
+
+      <footer>
+        <p>© dropmealineee.github.io
+          <span class="sep">·</span>
+          <a href="https://dropmealineee.github.io/">home</a>
+          <span class="sep">–</span>
+          <a href="https://dropmealineee.github.io/webcam">webcams</a>
+        </p>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- ── BOTTOM STATUS BAR ── -->
+  <div class="statusbar">
+    <div class="left">
+      <span>■ SYSTEM ONLINE</span>
+      <span class="hi">NODE · DROPMEALINEEE</span>
+    </div>
+    <div class="right">
+      <span id="clock">--:--:--</span>
+      <span>UTC+0000</span>
+    </div>
+  </div>
+
+  <script>
+    function tick() {
+      const now = new Date();
+      const t = now.toUTCString().split(' ')[4];
+      document.getElementById('clock').textContent = t;
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    function switchTab(id, btn) {
+      document.querySelectorAll('.doc-panel').forEach(p => p.classList.remove('visible'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('visible');
+      btn.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
